@@ -2,7 +2,7 @@
 # Jerney - DevSecOps CI/CD Pipeline
 # ==============================================================
 
-name: Jerney DevSecOps Pipeline
+name: Jerney DevSecOps Pipeline ECR
 
 on:
   push:
