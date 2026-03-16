@@ -156,10 +156,6 @@ jobs:
     needs: image-scan
     if: github.event_name == 'push'
 
-    strategy:
-      matrix:
-        component: [backend, frontend]
-
     steps:
 
       - uses: actions/checkout@v4
