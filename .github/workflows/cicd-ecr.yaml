@@ -175,6 +175,9 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
+      - name: Set short commit SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Build and Push FE Image
         uses: docker/build-push-action@v6
