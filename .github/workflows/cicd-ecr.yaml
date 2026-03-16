@@ -6,9 +6,9 @@ name: Jerney DevSecOps Pipeline ECR
 
 on:
   push:
-    branches: ["**"]
+    branches: ["feature/cicd"]
   pull_request:
-    branches: ["**"]
+    branches: ["feature/cicd"]
 
 permissions:
   contents: read
