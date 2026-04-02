@@ -17,7 +17,7 @@ jobs:
           echo "Running test stage..."
 
           # simulate failure (change to 0 for success)
-          exit 1
+          exit 0
 
   deploy:
     runs-on: ubuntu-latest
