@@ -1,0 +1,38 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    outputs:
+      stage_result:
+        description: "Result of test stage"
+        value: ${{ jobs.test-stage.outputs.result }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build running..."
+
+  test-stage:
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.set-result.outputs.result }}
+    steps:
+      - id: set-result
+        run: |
+          echo "Running test stage..."
+
+          # simulate pass/fail
+          if [ $((RANDOM % 2)) -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            exit 0   # IMPORTANT: don't fail workflow
+          fi
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test-stage
+    steps:
+      - run: echo "Deploy step"
