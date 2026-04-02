@@ -1,10 +1,8 @@
-name: Reusable Workflow
+name: Repo B Workflow
 
 on:
-  workflow_call:
-    outputs:
-      stage_result:
-        value: ${{ jobs.test-stage.outputs.result }}
+  repository_dispatch:
+    types: [run-test]
 
 jobs:
   build:
@@ -14,18 +12,12 @@ jobs:
 
   test-stage:
     runs-on: ubuntu-latest
-    outputs:
-      result: ${{ steps.set.outputs.result }}
     steps:
-      - id: set
-        run: |
+      - run: |
           echo "Running test stage..."
 
-          # simulate failure
-          echo "result=failure" >> $GITHUB_OUTPUT
-
-          # IMPORTANT: don't fail job
-          exit 0
+          # simulate failure (change to 0 for success)
+          exit 1
 
   deploy:
     runs-on: ubuntu-latest
